@@ -17,6 +17,12 @@ from database.models.writers import create_table_writers, insert_writer
 from database.models.writing_crews import create_table_writing_crew, insert_writing_crew
 
 
+import database.filters as filters
+
+def print_results(result):
+    for line in result:
+        print(line)
+
 create_table_movies()
 create_table_actors()
 create_table_characters()
@@ -151,6 +157,14 @@ wc9 = Crew(None, w9.writer_id, m3.movie_id)
 insert_writing_crew(wc9)
 
 everything = select_everything()
-for row in everything:
-    print(row)
+print_results(everything)
 
+
+print_results(filters.filter_by_actor("Daniel", "Craig"))
+print_results(filters.filter_by_character("James Bond"))
+print_results(filters.filter_by_studio("Columbia Pictures"))
+print_results(filters.filter_by_movie_name("Skyfall"))
+print_results(filters.filter_by_director("Rian", "Johnson"))
+print_results(filters.filter_by_writer("John", "Logan"))
+print_results(filters.filter_by_release_year("2012"))
+print_results(filters.filter_by_language("En"))
